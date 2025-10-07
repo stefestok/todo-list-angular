@@ -10,7 +10,7 @@
   @for (todo of todos; track todo) {
     <li>
       <input type="checkbox"
-      [(ngModel)] = "todo.completed"/>
+      [checked] = "todo.completed" (change)="toggleTodo(todo)" />
       <span [class.completed]="todo.completed">{{todo.text}}</span>
       <button (click)="removeTodo(todo)">remove</button>
     </li>
