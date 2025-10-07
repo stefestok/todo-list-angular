@@ -1,0 +1,15 @@
+<input 
+  type="text"
+  placeholder="Pridať úlohu..."
+  [(ngModel)]="newTodoText"
+  (keyup.enter)="addTodo()"
+/>
+<button (click)="addTodo()"></button>
+
+<ul>
+  @for (todo of todos; track todo) {
+    <li>
+      {{ todo.text }}
+    </li>
+  }
+</ul>
