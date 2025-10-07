@@ -4,12 +4,13 @@
   [(ngModel)]="newTodoText"
   (keyup.enter)="addTodo()"
 />
-<button (click)="addTodo()"></button>
+<button (click)="addTodo()">add</button>
 
 <ul>
   @for (todo of todos; track todo) {
     <li>
       {{ todo.text }}
+      <button (click)="removeTodo(todo)">remove</button>
     </li>
   }
 </ul>

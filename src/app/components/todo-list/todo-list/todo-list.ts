@@ -24,4 +24,8 @@ export class TodoList {
       this.newTodoText = '';
     }
   }
+
+  removeTodo(todoToRemove: {text: string; completed: boolean}) {
+    this.todos = this.todos.filter(todo => todo !== todoToRemove);
+  }
 }
