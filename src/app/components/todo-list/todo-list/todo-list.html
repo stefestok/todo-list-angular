@@ -3,15 +3,29 @@
   placeholder="Pridať úlohu..."
   [(ngModel)]="newTodoText"
   (keyup.enter)="addTodo()"
+  
 />
 <button (click)="addTodo()">add</button>
 
 <ul>
   @for (todo of todos; track todo) {
     <li>
-      <input type="checkbox"
-      [checked] = "todo.completed" (change)="toggleTodo(todo)" />
-      <span [class.completed]="todo.completed">{{todo.text}}</span>
+      <input type="checkbox" [checked] = "todo.completed" (change)="toggleTodo(todo)" />
+
+      @if (editingTodo === todo) {
+        <input 
+          type="text"
+          [(ngModel)]="editedText"
+          (keyup.enter)="saveEdit(todo)"
+          (blur)="saveEdit(todo)"
+          autofocus
+          />
+          <button (click)="saveEdit(todo)">uložiť</button>
+          <button (click)="cancelEdit()">zrušiť</button>
+      } @else {
+          <span [class.completed]="todo.completed" (dblclick)="startEdit(todo)">{{todo.text}}</span>
+      }
+      
       <button (click)="removeTodo(todo)">remove</button>
     </li>
   }

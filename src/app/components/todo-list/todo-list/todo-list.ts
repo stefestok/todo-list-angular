@@ -12,6 +12,8 @@ import { Todo, TodoService } from '../../../services/todo.service';
 })
 export class TodoList {
   newTodoText = '';
+  editingTodo: Todo | null = null;
+  editedText: string = '';
 
 
   constructor(public todoService: TodoService) {}
@@ -34,6 +36,25 @@ export class TodoList {
 
   toggleTodo(todo: Todo){
     this.todoService.toggleTodo(todo);
+  }
+
+  startEdit(todo: Todo) {
+    this.editingTodo = todo;
+    this.editedText = todo.text;
+  }
+
+  saveEdit(todo: Todo) {
+    const newText = this.editedText.trim();
+    if (newText && todo.text !== newText){
+      this.todoService.updateTodoText(todo, newText)
+    }
+    this.editingTodo = null;
+    this.editedText = '';
+  }
+
+  cancelEdit() {
+    this.editingTodo = null;
+    this.editedText = '';
   }
   
 }

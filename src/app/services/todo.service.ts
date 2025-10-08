@@ -22,6 +22,14 @@ export class TodoService {
         this._todos.update(todos => todos.filter(todo => todo !== todoToRemove));
     }
 
+    updateTodoText(todoToUpdate: Todo, newText: string) {
+  this._todos.update(todos =>
+    todos.map(todo =>
+      todo === todoToUpdate ? { ...todo, text: newText } : todo
+    )
+  );
+}
+
     toggleTodo(todoToToggle: Todo) {
         this._todos.update(todos =>
             todos.map(todo =>
